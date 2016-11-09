@@ -39,8 +39,8 @@ public class MapDemoActivity extends AppCompatActivity implements
 	private GoogleMap map;
 	private GoogleApiClient mGoogleApiClient;
 	private LocationRequest mLocationRequest;
-	private long UPDATE_INTERVAL = 60000;  /* 60 secs */
-	private long FASTEST_INTERVAL = 5000; /* 5 secs */
+	private long UPDATE_INTERVAL = 100;  /* 60 secs */
+	private long FASTEST_INTERVAL = 100; /* 5 secs */
 
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
@@ -179,9 +179,9 @@ public class MapDemoActivity extends AppCompatActivity implements
 
     public void onLocationChanged(Location location) {
         // Report to the UI that the location was updated
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //String msg = "Updated Location: " +
+                //Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
+       //  Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
     }
 
