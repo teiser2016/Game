@@ -1,36 +1,47 @@
 package com.Game.Game;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
+		import android.app.Activity;
+		import android.app.ProgressDialog;
+		import android.content.Intent;
+		import android.content.IntentSender;
+		import android.content.pm.PackageManager;
+		import android.location.Location;
+		import android.os.AsyncTask;
+		import android.os.Bundle;
+		import android.support.v4.app.ActivityCompat;
+		import android.support.v7.app.AppCompatActivity;
+		import android.util.Log;
+		import android.webkit.WebView;
+		import android.widget.TextView;
+		import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
+		import com.google.android.gms.common.ConnectionResult;
+		import com.google.android.gms.common.GooglePlayServicesUtil;
+		import com.google.android.gms.common.api.GoogleApiClient;
+		import com.google.android.gms.location.LocationListener;
+		import com.google.android.gms.location.LocationRequest;
+		import com.google.android.gms.location.LocationServices;
+		import com.google.android.gms.maps.CameraUpdate;
+		import com.google.android.gms.maps.CameraUpdateFactory;
+		import com.google.android.gms.maps.GoogleMap;
+		import com.google.android.gms.maps.OnMapReadyCallback;
+		import com.google.android.gms.maps.SupportMapFragment;
+		import com.google.android.gms.maps.model.LatLng;
 
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.RuntimePermissions;
+		import java.io.BufferedReader;
+		import java.io.IOException;
+		import java.io.InputStream;
+		import java.io.InputStreamReader;
+		import java.net.HttpURLConnection;
+		import java.net.MalformedURLException;
+		import java.net.URL;
+
+		import db.MongoConnection;
+		import permissions.dispatcher.NeedsPermission;
+		import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MapDemoActivity extends AppCompatActivity implements
+public class MainActivity extends AppCompatActivity implements
 		GoogleApiClient.ConnectionCallbacks,
 		GoogleApiClient.OnConnectionFailedListener,
 		LocationListener {
@@ -39,15 +50,20 @@ public class MapDemoActivity extends AppCompatActivity implements
 	private GoogleMap map;
 	private GoogleApiClient mGoogleApiClient;
 	private LocationRequest mLocationRequest;
-	private long UPDATE_INTERVAL = 100;  /* 60 secs */
-	private long FASTEST_INTERVAL = 100; /* 5 secs */
+	private long UPDATE_INTERVAL = 60000;  /* 60 secs */
+	private long FASTEST_INTERVAL = 5000; /* 5 secs */
 
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+
+	private String dbURL = "";
+	private LatLng userLocation = null;
+	TextView tv;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.map_demo_activity);
+		setContentView(R.layout.main_activity);
 
 		mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
 		if (mapFragment != null) {
@@ -61,6 +77,9 @@ public class MapDemoActivity extends AppCompatActivity implements
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
 
+		tv = (TextView) findViewById(R.id.tv);
+
+		new MongoConnection(MainActivity.this).connect();
 	}
 
 	protected void loadMap(GoogleMap googleMap) {
@@ -68,7 +87,7 @@ public class MapDemoActivity extends AppCompatActivity implements
 		if (map != null) {
 			// Map is ready
 			Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
-			MapDemoActivityPermissionsDispatcher.getMyLocationWithCheck(this);
+			MainActivityPermissionsDispatcher.getMyLocationWithCheck(this);
 		} else {
 			Toast.makeText(this, "Error - Map was null!!", Toast.LENGTH_SHORT).show();
 		}
@@ -77,7 +96,7 @@ public class MapDemoActivity extends AppCompatActivity implements
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		MapDemoActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+		MainActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
 	}
 
 	@SuppressWarnings("all")
@@ -124,7 +143,7 @@ public class MapDemoActivity extends AppCompatActivity implements
 		// Decide what to do based on the original request code
 		switch (requestCode) {
 			case CONNECTION_FAILURE_RESOLUTION_REQUEST:
-			//If the result code is Activity.RESULT_OK, try to connect again
+				//If the result code is Activity.RESULT_OK, try to connect again
 				switch (resultCode) {
 					case Activity.RESULT_OK:
 						mGoogleApiClient.connect();
@@ -158,6 +177,9 @@ public class MapDemoActivity extends AppCompatActivity implements
 		if (location != null) {
 			Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
 			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+			userLocation = latLng;
+
 			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
 			map.animateCamera(cameraUpdate);
 		} else {
@@ -177,23 +199,23 @@ public class MapDemoActivity extends AppCompatActivity implements
 		LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 	}
 
-    public void onLocationChanged(Location location) {
-        // Report to the UI that the location was updated
-        //String msg = "Updated Location: " +
-                //Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
-       //  Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	public void onLocationChanged(Location location) {
+		// Report to the UI that the location was updated
+		String msg = "Updated Location: " +
+				Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
-    }
+	}
 
-    //Called by Location Services if the connection to the location client drops because of an error.
-    @Override
-    public void onConnectionSuspended(int i) {
-        if (i == CAUSE_SERVICE_DISCONNECTED) {
-            Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
-        } else if (i == CAUSE_NETWORK_LOST) {
-            Toast.makeText(this, "Network lost. Please re-connect.", Toast.LENGTH_SHORT).show();
-        }
-    }
+	//Called by Location Services if the connection to the location client drops because of an error.
+	@Override
+	public void onConnectionSuspended(int i) {
+		if (i == CAUSE_SERVICE_DISCONNECTED) {
+			Toast.makeText(this, "Disconnected. Please re-connect.", Toast.LENGTH_SHORT).show();
+		} else if (i == CAUSE_NETWORK_LOST) {
+			Toast.makeText(this, "Network lost. Please re-connect.", Toast.LENGTH_SHORT).show();
+		}
+	}
 
 	//Called by Location Services if the attempt to Location Services fails.
 	@Override
