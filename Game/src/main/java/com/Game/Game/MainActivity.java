@@ -36,7 +36,7 @@ package com.Game.Game;
 		import java.net.MalformedURLException;
 		import java.net.URL;
 
-		import db.MongoConnection;
+		//import db.MongoConnection;
 		import permissions.dispatcher.NeedsPermission;
 		import permissions.dispatcher.RuntimePermissions;
 
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements
 	private GoogleMap map;
 	private GoogleApiClient mGoogleApiClient;
 	private LocationRequest mLocationRequest;
-	private long UPDATE_INTERVAL = 60000;  /* 60 secs */
+	private long UPDATE_INTERVAL = 100;  /* 60 secs */
 	private long FASTEST_INTERVAL = 5000; /* 5 secs */
 
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
@@ -77,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
 
-		tv = (TextView) findViewById(R.id.tv);
+		//tv = (TextView) findViewById(R.id.tv);
 
-		new MongoConnection(MainActivity.this).connect();
+		//new MongoConnection(MainActivity.this).connect();
 	}
 
 	protected void loadMap(GoogleMap googleMap) {
