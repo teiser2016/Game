@@ -212,8 +212,10 @@ public class MainActivity extends AppCompatActivity implements
 		//there can only be one nearby
 		LatLng nearbyEntity = new NearbySearch(userLocation).findEntity();
 
-		//display marker of nearby entity
-		setMarker(nearbyEntity.latitude, nearbyEntity.longitude, "name of obj/npc");
+		if (nearbyEntity != null){
+			//display marker of nearby entity
+			setMarker(nearbyEntity.latitude, nearbyEntity.longitude, "name of obj/npc");
+		}
 	}
 
 	public void setMarker(double lat1, double lng1, String title1){
