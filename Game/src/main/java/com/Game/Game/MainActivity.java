@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements
 	public void onLocationChanged(Location location) {
 		//parameter:location = updated location
 
-		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		/*LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 		//update userLocation
 		userLocation = latLng;
 
@@ -213,8 +213,8 @@ public class MainActivity extends AppCompatActivity implements
 		LatLng nearbyEntity = new NearbySearch(userLocation).findEntity();
 
 		//display marker of nearby entity
-		setMarker(nearbyEntity.latitude, nearbyEntity.longitude, "name of obj/npc");
-	}
+		setMarker(nearbyEntity.latitude, nearbyEntity.longitude, "name of obj/npc");*/
+	}/*
 
 	public void setMarker(double lat1, double lng1, String title1){
 		LatLng latLng = new LatLng(lat1, lng1);
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements
 		markerOptions.position(latLng);
 		markerOptions.title(title1);
 		Marker marker = map.addMarker(markerOptions);
-	}
+	}*/
 
 	//Called by Location Services if the connection to the location client drops because of an error.
 	@Override
