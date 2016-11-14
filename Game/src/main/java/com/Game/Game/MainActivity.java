@@ -27,6 +27,8 @@ package com.Game.Game;
 		import com.google.android.gms.maps.OnMapReadyCallback;
 		import com.google.android.gms.maps.SupportMapFragment;
 		import com.google.android.gms.maps.model.LatLng;
+		import com.google.android.gms.maps.model.Marker;
+		import com.google.android.gms.maps.model.MarkerOptions;
 
 		import java.io.BufferedReader;
 		import java.io.IOException;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
 	private String dbURL = "";
-	private LatLng userLocation = null;
+	public static LatLng userLocation = null;
 	TextView tv;
 
 
@@ -200,11 +202,26 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	public void onLocationChanged(Location location) {
-		// Report to the UI that the location was updated
-		//String msg = "Updated Location: " +
-			//	Double.toString(location.getLatitude()) + "," + Double.toString(location.getLongitude());
-		//Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		//parameter:location = updated location
 
+		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		//update userLocation
+		userLocation = latLng;
+
+		//every time there is an update in the user's location, search for nearby object or npc within radius
+		//there can only be one nearby
+		LatLng nearbyEntity = new NearbySearch(userLocation).findEntity();
+
+		//display marker of nearby entity
+		setMarker(nearbyEntity.latitude, nearbyEntity.longitude, "name of obj/npc");
+	}
+
+	public void setMarker(double lat1, double lng1, String title1){
+		LatLng latLng = new LatLng(lat1, lng1);
+		MarkerOptions markerOptions = new MarkerOptions();
+		markerOptions.position(latLng);
+		markerOptions.title(title1);
+		Marker marker = map.addMarker(markerOptions);
 	}
 
 	//Called by Location Services if the connection to the location client drops because of an error.
