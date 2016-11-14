@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NearbySearch {
 
-  /*  //store user's location
+    //store user's location
     LatLng userLocation = null;
 
     private static ArrayList<Location> objLocations = new ArrayList<>();
@@ -102,5 +102,5 @@ public class NearbySearch {
         return distance;
     }
 
-*/
+
 }
