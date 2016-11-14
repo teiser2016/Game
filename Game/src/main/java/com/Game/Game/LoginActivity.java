@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_new);
 
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
@@ -23,8 +23,8 @@ public class Login extends AppCompatActivity {
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(Login.this, Register.class);
-                Login.this.startActivity(registerIntent);
+                Intent registerIntent = new Intent(LoginActivity.this, Register.class);
+                LoginActivity.this.startActivity(registerIntent);
 
             }
         });
