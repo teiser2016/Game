@@ -10,4 +10,70 @@
 	   android:layout_width="match_parent"
 	   android:layout_height="match_parent"/>
 
+	<Button
+		android:id="@+id/button1"
+		android:layout_width="match_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="23dp"
+		android:text="Select a character"
+		android:onClick="selectaCharacter"/>
+
+
+	<Button
+		android:id="@+id/button2"
+		android:layout_width="match_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="23dp"
+		android:text="Select gender"
+		android:onClick="selectgender"/>
+
+
+	<EditText
+		android:id="@+id/editText"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="23dp"
+		android:ems="10"
+		android:hint="@string/edit_hint"
+		android:inputType="textnickname"/>
+
+
+	<Button
+		android:id="@+id/button_show"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="29dp"
+		android:text="Button"/>
+
+
+	<TextView
+		android:id="@+id/textView1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/button_show"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="36dp"
+		android:text="Large Text"
+		android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+	<Button
+		android:id="@+id/button3"
+		android:layout_width="match_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="30dp"
+		android:text="Home"
+		android:onClick="btnReturn1"/>
+
+
 </RelativeLayout>
