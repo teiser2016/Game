@@ -37,7 +37,8 @@ package com.Game.Game;
 public class MainActivity extends AppCompatActivity implements
 		GoogleApiClient.ConnectionCallbacks,
 		GoogleApiClient.OnConnectionFailedListener,
-		LocationListener {
+		LocationListener,
+		GoogleMap.OnMarkerClickListener{
 
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
@@ -171,12 +172,31 @@ public class MainActivity extends AppCompatActivity implements
 
 			userLocation = latLng;
 
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-			map.animateCamera(cameraUpdate);
+			new MarkersHandler().setMarkersOnMap(map);
+
+			new CameraHandler().setCamera(map, virtualUser);
+
+			map.setOnMarkerClickListener(this);
+
 		} else {
 			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
 		}
 		startLocationUpdates();
+	}
+
+	@Override
+	public boolean onMarkerClick(final Marker marker) {
+
+		Integer tag = (Integer) marker.getTag();
+
+		new MarkersHandler().highlightMarker(marker, tag);
+
+		LatLng latLng = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
+		//the marker clicked is the user's virtual location
+		virtualUser = latLng;
+
+		// Return false to indicate that we have not consumed the event and that we wish for the default behavior to occur
+		return false;
 	}
 
 	protected void startLocationUpdates() {
