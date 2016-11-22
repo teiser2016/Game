@@ -1,17 +1,16 @@
 package com.Game.Game;
 
+		import android.Manifest;
 		import android.app.Activity;
-		import android.app.ProgressDialog;
 		import android.content.Intent;
 		import android.content.IntentSender;
 		import android.content.pm.PackageManager;
 		import android.location.Location;
-		import android.os.AsyncTask;
 		import android.os.Bundle;
 		import android.support.v4.app.ActivityCompat;
 		import android.support.v7.app.AppCompatActivity;
 		import android.util.Log;
-		import android.webkit.WebView;
+		import android.view.View;
 		import android.widget.TextView;
 		import android.widget.Toast;
 
@@ -29,14 +28,6 @@ package com.Game.Game;
 		import com.google.android.gms.maps.model.LatLng;
 		import com.google.android.gms.maps.model.Marker;
 		import com.google.android.gms.maps.model.MarkerOptions;
-
-		import java.io.BufferedReader;
-		import java.io.IOException;
-		import java.io.InputStream;
-		import java.io.InputStreamReader;
-		import java.net.HttpURLConnection;
-		import java.net.MalformedURLException;
-		import java.net.URL;
 
 		//import db.MongoConnection;
 		import permissions.dispatcher.NeedsPermission;
@@ -80,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements
 		}
 
 		//tv = (TextView) findViewById(R.id.tv);
-
-		//new MongoConnection(MainActivity.this).connect();
 	}
 
 	protected void loadMap(GoogleMap googleMap) {
@@ -253,8 +242,24 @@ public class MainActivity extends AppCompatActivity implements
 					"Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
 		}
 	}
+<<<<<<< Updated upstream
 
 
 
 
+=======
+/*
+	public void selectaCharacter(View v)
+	{
+		Charchoice my_dialog = new Charchoice();
+		my_dialog.show(getSupportFragmentManager(),"my_dialog");
+	}
+
+	public void selectgender(View v)
+	{
+		Properties my_dialog_a = new Properties();
+		my_dialog_a.show(getSupportFragmentManager(),"my_dialog_a");
+	}
+*/
+>>>>>>> Stashed changes
 }

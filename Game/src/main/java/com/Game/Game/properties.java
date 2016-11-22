@@ -3,14 +3,22 @@ package com.Game.Game;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 
 
-public class properties extends DialogFragment
+public class Properties extends DialogFragment
 {
     final CharSequence items[] = {"Male", "Female"};
 
@@ -20,7 +28,7 @@ public class properties extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Select gender").setSingleChoiceItems(items, -1, new OnClickListener(){
+        builder.setTitle("Select gender").setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener(){
 
             @Override
             public void onClick(DialogInterface arg0, int arg1){
@@ -52,7 +60,7 @@ public class properties extends DialogFragment
         return builder.create();
     }
 
-    public class properties extends Activity
+    public class InnerProperties extends Activity
     {
         EditText edit;
         TextView text;
@@ -68,7 +76,7 @@ public class properties extends DialogFragment
             Button b = (Button) findViewById(R.id.button_show);
 
             //eventhandling for button using OnClickListener interface
-            b.setOnClickListener(new OnClickListener(){
+            b.setOnClickListener(new DialogInterface.OnClickListener(){
 
                 @Override
                 public void onClick(View v){

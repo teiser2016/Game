@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class Charchoice extends DialogFragment
 {
-    final CharSequence items[] = {"Detective", "Kidnapper", "Abductee"};
+   /* final CharSequence items[] = {"Detective", "Kidnapper", "Abductee"};
 
     String selection;
     @Override
@@ -73,11 +73,11 @@ public class Charchoice extends Activity {
             @Override
             public void onClick(View v) {
 
-                //after button OK is clicked the form with properties is shown
-                Intent intent = new Intent(Charchoice.this, properties.class);
+                //after button OK is clicked the form with Properties is shown
+                Intent intent = new Intent(Charchoice.this, Properties.class);
                 startActivity(intent);
             }
         });
 
-    }
+    }*/
 }
