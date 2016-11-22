@@ -8,6 +8,7 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
+
     <permission
         android:name="com.Game.Game.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />

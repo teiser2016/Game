@@ -65,6 +65,10 @@ public class Properties extends DialogFragment
         EditText edit;
         TextView text;
 
+        String Getedit;
+
+        String DataParseUrl = "http://insert_data.php";
+
         @Override
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -96,6 +100,60 @@ public class Properties extends DialogFragment
                 etedit.setError("Not Null");
                 return;
             }
+
+            GetDataFromEditText();
+
+            SendDataToServer(Getedit);
+        }
+
+        public void GetDataFromEditText(){
+
+            Getedit = edit.getText().toString();
+        }
+
+        public void SendDataToServer(final String nickname{
+            class SendPostReqAsyncTask extends AsyncTask<String, Void, String> {
+
+                @Override
+                protected String doInBackground(String... params) {
+
+                    String QuickName = nickname ;
+
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                    nameValuePairs.add(new BasicNameValuePair("nickname", QuickName));
+
+
+                    try {
+                        HttpClient httpClient = new DefaultHttpClient();
+
+                        HttpPost httpPost = new HttpPost(DataParseUrl);
+
+                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                        HttpResponse response = httpClient.execute(httpPost);
+
+                        HttpEntity entity = response.getEntity();
+
+
+                    } catch (ClientProtocolException e) {
+
+                    } catch (IOException e) {
+
+                    }
+                    return "Data Submit Successfully";
+                }
+
+                @Override
+                protected void onPostExecute(String result) {
+                    super.onPostExecute(result);
+
+                    Toast.makeText(Properties.this, "Data Submit Successfully", Toast.LENGTH_LONG).show();
+
+                }
+            }
+            SendPostReqAsyncTask sendPostReqAsyncTask = new SendPostReqAsyncTask();
+            SendPostReqAsyncTask.execute(nickname);
         }
 
         btnReturn1.setOnClickListener(new View.OnClickListener() {
