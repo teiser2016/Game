@@ -1,5 +1,10 @@
 package com.Game.Game;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+
 public class CameraHandler {
 
     public void setCamera(GoogleMap map, LatLng position){

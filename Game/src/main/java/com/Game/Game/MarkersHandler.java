@@ -1,5 +1,11 @@
 package com.Game.Game;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 public class MarkersHandler {
 
     public void setMarkersOnMap(GoogleMap map){
