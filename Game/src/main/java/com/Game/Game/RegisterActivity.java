@@ -17,27 +17,31 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+
+    EditText etUsername;
+    EditText etPassword;
+    EditText etMail;
+    Button bRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        etMail = (EditText) findViewById(R.id.etMail);
+        bRegister = (Button) findViewById(R.id.bRegister);
 
-
-        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
-        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
-        final EditText etMail = (EditText) findViewById(R.id.etMail);
-        final Button bRegister = (Button) findViewById(R.id.bRegister);
+        bRegister.setOnClickListener(this);
     }
 
-    bRegister.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v) {
-            final String username = etUsername.getText().toString();
-            final String mail = etMail.getText().toString();
-            final String password = etPassword.getText().toString();
+    @Override
+    public void onClick(View v) {
+        final String username = etUsername.getText().toString();
+        final String mail = etMail.getText().toString();
+        final String password = etPassword.getText().toString();
 
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
@@ -65,6 +69,5 @@ public class RegisterActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
             queue.add(registerRequest);
         }
-    })
-}
+
 }

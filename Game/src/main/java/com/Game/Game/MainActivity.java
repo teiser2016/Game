@@ -29,7 +29,6 @@ package com.Game.Game;
 		import com.google.android.gms.maps.model.Marker;
 		import com.google.android.gms.maps.model.MarkerOptions;
 
-		//import db.MongoConnection;
 		import permissions.dispatcher.NeedsPermission;
 		import permissions.dispatcher.RuntimePermissions;
 
@@ -51,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private String dbURL = "";
 	public static LatLng userLocation = null;
-	TextView tv;
-
+	public static LatLng virtualUser = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
 
-		//tv = (TextView) findViewById(R.id.tv);
 	}
 
 	protected void loadMap(GoogleMap googleMap) {
@@ -262,24 +259,5 @@ public class MainActivity extends AppCompatActivity implements
 					"Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
 		}
 	}
-<<<<<<< Updated upstream
 
-
-
-
-=======
-/*
-	public void selectaCharacter(View v)
-	{
-		Charchoice my_dialog = new Charchoice();
-		my_dialog.show(getSupportFragmentManager(),"my_dialog");
-	}
-
-	public void selectgender(View v)
-	{
-		Properties my_dialog_a = new Properties();
-		my_dialog_a.show(getSupportFragmentManager(),"my_dialog_a");
-	}
-*/
->>>>>>> Stashed changes
 }
