@@ -18,49 +18,9 @@ import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 
 
-public class Properties extends DialogFragment
-{
-    final CharSequence items[] = {"Male", "Female"};
 
-    String selection;
-    @Override
-    @NonNull
-    public Dialog onCreateDialog(Bundle savedInstanceState){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Select gender").setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener(){
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1){
-                // TODO Auto-generated method stub
-
-                switch(arg1){
-                    case 0:
-
-                        selection = (String) items[arg1];
-
-                        break;
-                    case 1:
-
-                        selection = (String) items[arg1];
-
-                        break;
-
-                }
-            }
-
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which){
-                // TODO Auto-generated method stub
-
-                Toast.makeText(getActivity(), "Your gender is :" +selection, Toast.LENGTH_SHORT).show();
-            }
-        });
-        return builder.create();
-    }
-
-    public class InnerProperties extends Activity
+    public class Properties extends Activity
     {
         EditText edit;
         TextView text;
@@ -160,8 +120,8 @@ public class Properties extends DialogFragment
 
         public void onClick(View v) {
 
-            //goes to MainActivity.java when button Home is clicked
-            Intent i=new Intent(this, MainActivity.class);
+            //goes to Properties_a.java when button Home is clicked
+            Intent i=new Intent(this, Properties_a.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }

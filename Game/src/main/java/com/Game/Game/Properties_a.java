@@ -1,6 +1,7 @@
 package com.Game.Game;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
@@ -17,12 +18,12 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class Charchoice extends Activity {
+public class Properties_a extends Activity {
 
     private String URL_NEW_CHAR = "http://new_char.php";
-    private Button btnAddchar;
+    private Button btnAddgender;
 
-    String choosechar = "1";
+    String choosegender = "1";
 
 
     @Override
@@ -38,15 +39,13 @@ public class Charchoice extends Activity {
                 // TODO Auto-generated method stub
 
                 switch (checkedId) {
-                    case R.id.answer1A:
-                        choosechar = "1";
+                    case R.id.answer2A:
+                        choosegender = "1";
                         break;
-                    case R.id.answer1B:
-                        choosechar = "2";
+                    case R.id.answer2B:
+                        choosegender = "2";
                         break;
-                    case R.id.answer1C:
-                        choosechar = "3";
-                        break;
+
 
                 }
 
@@ -54,14 +53,14 @@ public class Charchoice extends Activity {
         });
 
 
-        btnAddchar = (Button) findViewById(R.id.submit);
+        btnAddgender = (Button) findViewById(R.id.submit1);
 
-        btnAddchar.setOnClickListener(new View.OnClickListener() {
+        btnAddgender.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                new AddNewchar().execute(choosechar);
+                new AddNewgender().execute(choosegender);
             }
         });
 
@@ -69,11 +68,11 @@ public class Charchoice extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.Charchoice, menu);
+        getMenuInflater().inflate(R.menu.Properties(a), menu);
         return true;
     }
 
-    private class AddNewchar extends AsyncTask<String, Void, Void> {
+    private class AddNewgender extends AsyncTask<String, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -84,12 +83,12 @@ public class Charchoice extends Activity {
         @Override
         protected Void doInBackground(String... arg) {
             // TODO Auto-generated method stub
-            String charNo = arg[0];
+            String genderNo = arg[0];
 
 
             // Preparing post params
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("charNo", charNo));
+            params.add(new BasicNameValuePair("genderNo", genderNo));
 
 
             ServiceHandler serviceClient = new ServiceHandler();
@@ -129,14 +128,16 @@ public class Charchoice extends Activity {
         }
     }
 
-    btnAddchar.setOnClickListener(new View.OnClickListener() {
+    btnAddgender.setOnClickListener(new View.OnClickListener() {
 
         public void onClick(View v) {
 
-
-            //after button OK is clicked the form with Properties is shown
-            Intent intent = new Intent(Charchoice.this, Properties.class);
-            startActivity(intent);
+            //goes to MainActivity.java when button OK is clicked
+            Intent i=new Intent(this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
         }
-    });
+
+        )};
 }
+
