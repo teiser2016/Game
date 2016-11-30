@@ -7,6 +7,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,9 +32,9 @@ public class Charchoice extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charchoice);
 
-        RadioGroup char = (RadioGroup) findViewById(R.id.answer1);
+        RadioGroup charSelected = (RadioGroup) findViewById(R.id.answer1);
 
-        char.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        charSelected.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // TODO Auto-generated method stub
@@ -62,6 +64,17 @@ public class Charchoice extends Activity {
                 // TODO Auto-generated method stub
 
                 new AddNewchar().execute(choosechar);
+            }
+        });
+
+        btnAddchar.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+
+                //after button OK is clicked the form with Properties is shown
+                Intent intent = new Intent(Charchoice.this, Properties.class);
+                startActivity(intent);
             }
         });
 
@@ -129,14 +142,5 @@ public class Charchoice extends Activity {
         }
     }
 
-    btnAddchar.setOnClickListener(new View.OnClickListener() {
 
-        public void onClick(View v) {
-
-
-            //after button OK is clicked the form with Properties is shown
-            Intent intent = new Intent(Charchoice.this, Properties.class);
-            startActivity(intent);
-        }
-    });
 }

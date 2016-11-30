@@ -8,6 +8,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -18,7 +20,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class Properties_a extends Activity {
+public class PropertiesA extends Activity {
 
     private String URL_NEW_CHAR = "http://new_char.php";
     private Button btnAddgender;
@@ -31,9 +33,9 @@ public class Properties_a extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.properties_a);
 
-        RadioGroup char = (RadioGroup) findViewById(R.id.answer1);
+        RadioGroup charSelected = (RadioGroup) findViewById(R.id.answer1);
 
-        char.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+        charSelected.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // TODO Auto-generated method stub
@@ -63,6 +65,18 @@ public class Properties_a extends Activity {
                 new AddNewgender().execute(choosegender);
             }
         });
+
+        btnAddgender.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+
+                //goes to MainActivity.java when button OK is clicked
+                Intent i=new Intent(PropertiesA.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+
+            )};
 
     }
 
@@ -128,16 +142,5 @@ public class Properties_a extends Activity {
         }
     }
 
-    btnAddgender.setOnClickListener(new View.OnClickListener() {
-
-        public void onClick(View v) {
-
-            //goes to MainActivity.java when button OK is clicked
-            Intent i=new Intent(this, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        }
-
-        )};
 }
 
