@@ -32,7 +32,7 @@ import android.support.v4.app.DialogFragment;
         @Override
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.main_activity);
+            setContentView(R.layout.properties);
 
             //setup ui
             edit = (EditText) findViewById(R.id.editText);

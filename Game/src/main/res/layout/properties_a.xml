@@ -6,6 +6,14 @@
     android:layout_height="match_parent">
     tools:context=".Properties_a">
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +58,7 @@
 
         </RadioGroup>
     </TableRow>
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,6 +73,6 @@
             android:gravity="center"
             android:text="OK" />
     </TableRow>
-
+    </TableLayout>
 
 </LinearLayout>

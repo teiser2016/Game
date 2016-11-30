@@ -29,7 +29,7 @@ public class Properties_a extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_prediction);
+        setContentView(R.layout.properties_a);
 
         RadioGroup char = (RadioGroup) findViewById(R.id.answer1);
 
@@ -68,7 +68,7 @@ public class Properties_a extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.Properties(a), menu);
+        getMenuInflater().inflate(R.menu.properties_a, menu);
         return true;
     }
 
