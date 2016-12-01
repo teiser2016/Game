@@ -17,57 +17,51 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
-
-    EditText etUsername;
-    EditText etPassword;
-    EditText etMail;
-    Button bRegister;
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        etUsername = (EditText) findViewById(R.id.etUsername);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        etMail = (EditText) findViewById(R.id.etMail);
-        bRegister = (Button) findViewById(R.id.bRegister);
+        final EditText etMail = (EditText) findViewById(R.id.etMail);
+        final EditText etUsername = (EditText) findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
+        final Button bRegister = (Button) findViewById(R.id.bRegister);
 
-        bRegister.setOnClickListener(this);
-    }
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String username = etUsername.getText().toString();
+                final String password = etPassword.getText().toString();
+                final String mail = etMail.getText().toString();
 
-    @Override
-    public void onClick(View v) {
-        final String username = etUsername.getText().toString();
-        final String mail = etMail.getText().toString();
-        final String password = etPassword.getText().toString();
-
-            Response.Listener<String> responseListener = new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        boolean success = jsonResponse.getBoolean("success");
-                        if (success) {
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            RegisterActivity.this.startActivity(intent);
-                        } else {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                            builder.setMessage("Register Failed")
-                                    .setNegativeButton("Retry", null)
-                                    .create()
-                                    .show();
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                RegisterActivity.this.startActivity(intent);
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Register Failed")
+                                        .setNegativeButton("Retry", null)
+                                        .create()
+                                        .show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
-            };
+                };
 
-            RegisterRequest registerRequest = new RegisterRequest(username, password, mail, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-            queue.add(registerRequest);
-        }
-
+                RegisterRequest registerRequest = new RegisterRequest(username,password,mail, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                queue.add(registerRequest);
+            }
+        });
+    }
 }
