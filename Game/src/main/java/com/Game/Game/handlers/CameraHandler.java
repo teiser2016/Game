@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.handlers;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
