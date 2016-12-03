@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Items;
+package com.Game.Game.Model.singletonItems;
 
 import Model.Map.CurrentLocation;
 import Model.Messages;

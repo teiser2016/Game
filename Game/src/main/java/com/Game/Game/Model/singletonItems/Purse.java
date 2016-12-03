@@ -1,4 +1,4 @@
-package Model.Items;
+package com.Game.Game.Model.singletonItems;
 
 import Model.Map.CurrentLocation;
 import java.io.Serializable;
