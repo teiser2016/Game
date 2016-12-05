@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    tools:context=".Charoptions">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="4"
+                android:padding="18dip"
+                android:text="Select your character"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioGroup
+                android:id="@+id/char_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4" >
+
+                <RadioButton
+                    android:id="@+id/Mitsakos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective2"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Apostolis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Detective1"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Kaori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective3"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Sta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective4"
+                    android:textColor="#ffffff" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/bChar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="OK" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>
