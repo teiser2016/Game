@@ -1,11 +1,10 @@
 package com.Game.Game.Model.singletonItems;
 
-import Model.Map.CurrentLocation;
 import java.io.Serializable;
 import static java.lang.System.out;
 
 
-public class Knife implements IItem, Serializable {
+public class Knife extends Item implements Serializable {
     private String itemName;
     private String itemDescription;
     

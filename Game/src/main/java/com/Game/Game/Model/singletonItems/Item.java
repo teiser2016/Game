@@ -1,4 +1,8 @@
-public abstract class Item implements Serializable{
+package com.Game.Game.Model.singletonItems;
+
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
     protected Integer id;
     protected String name;
     protected String description;

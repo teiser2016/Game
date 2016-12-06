@@ -1,21 +1,11 @@
-package com.Game.Game.modelsDB;
+package com.Game.Game;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.view.View.OnClickListener;
 import android.widget.RadioButton;
 import android.widget.Toast;

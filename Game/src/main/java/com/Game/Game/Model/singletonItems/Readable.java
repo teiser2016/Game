@@ -1,10 +1,9 @@
 package com.Game.Game.Model.singletonItems;
 
-import Model.Map.CurrentLocation;
 import java.io.Serializable;
 import static java.lang.System.out;
 
-public class Readable implements IItem, Serializable{
+public class Readable extends Item implements Serializable{
 
     private String itemName;
     private String itemDescription;
@@ -37,15 +36,15 @@ public class Readable implements IItem, Serializable{
     @Override
     public void itemAction(CurrentLocation currentLocation, String word) {
         if (currentLocation.getPlayer().getPlayerInventory().containsKey(word)){
-            IItem item1 = currentLocation.getPlayer().getPlayerInventory().get(word);
+            Item item1 = currentLocation.getPlayer().getPlayerInventory().get(word);
             switch (item1.getItemName()) {
                 case "post note":
-                    IItem item3 = currentLocation.getPlayer().getPlayerInventory().get(word);
+                    Item item3 = currentLocation.getPlayer().getPlayerInventory().get(word);
                     item3.setItemDescription("Its a simple post note. On it is written some strange numbers \"PWD 85879-2937663-9675\"");
                     out.print(" -You unfolded the post note and it shows some drawings. Maybe is' the pattern from her smartphone.\n");
                     break;
                 case "usb flash drive":
-                    IItem item2 = currentLocation.getPlayer().getPlayerInventory().get(word);
+                    Item item2 = currentLocation.getPlayer().getPlayerInventory().get(word);
                     item2.setItemName("Use usb drive and read txt file");
                     item2.setItemDescription("Its a txt with account transactions. A big ammount of money have moved to an uknown account!\"");
                     out.print(" -You use the usb flash drive to see what's inside!.\n -The txt says!:\n");

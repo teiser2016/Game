@@ -5,17 +5,17 @@
  */
 package com.Game.Game.Model.singletonItems;
 
-import Model.Map.CurrentLocation;
-import Model.Messages;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class flashlight implements IItem, Serializable{
+import static com.google.android.gms.nearby.Nearby.Messages;
+
+public class Flashlight extends Item implements Serializable{
     private String itemName;
     private String itemDescription;
     private Messages msg = new Messages();
     
-    public flashlight(String name, String description){
+    public Flashlight(String name, String description){
 
         this.itemName = name;
         this.itemDescription = description;
@@ -47,7 +47,7 @@ public class flashlight implements IItem, Serializable{
         System.out.printf(" -Do you want to use Flashlight: ");
         Scanner cn = new Scanner(System.in);
         String itemName = cn.nextLine();
-        IItem item2 = currentLocation.getPlayer().getPlayerInventory().get(itemName);
+        Item item2 = currentLocation.getPlayer().getPlayerInventory().get(itemName);
     }
 }
 
