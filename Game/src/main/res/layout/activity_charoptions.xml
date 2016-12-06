@@ -40,7 +40,14 @@
                 android:layout_weight="0.4" >
 
                 <RadioButton
-                    android:id="@+id/char_id1"
+                    android:id="@+id/Mitsakos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective2"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Apostolis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -48,21 +55,14 @@
                     android:textColor="#ffffff" />
 
                 <RadioButton
-                    android:id="@+id/char_id2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Detective2"
-                    android:textColor="#ffffff" />
-
-                <RadioButton
-                    android:id="@+id/char_id3"
+                    android:id="@+id/Kaori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Detective3"
                     android:textColor="#ffffff" />
 
                 <RadioButton
-                    android:id="@+id/char_id4"
+                    android:id="@+id/Sta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Detective4"
@@ -76,7 +76,7 @@
             android:gravity="center_horizontal" >
 
             <Button
-                android:id="@+id/display"
+                android:id="@+id/bChar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
