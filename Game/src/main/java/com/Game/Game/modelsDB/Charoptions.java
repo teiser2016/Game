@@ -66,13 +66,13 @@ public class Charoptions extends AppCompatActivity
 
                 };
 
-                    CharRequest charrequest = new CharRequest(char_name,responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
-                    queue.add(charrequest);
-                }
-            });
-        }
+                CharRequest charrequest = new CharRequest(char_name,responseListener);
+                RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
+                queue.add(charrequest);
+            }
+        });
     }
+}
 
 
 

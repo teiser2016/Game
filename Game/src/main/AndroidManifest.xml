@@ -41,7 +41,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
 
         <uses-library
             android:name="com.google.android.maps"
@@ -62,7 +62,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Charoptions"></activity>
+        <activity android:name=".Charoptions" />
+        <activity android:name=".modelsDB.Charoptions"></activity>
     </application>
 
 </manifest>
