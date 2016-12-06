@@ -2,6 +2,7 @@ package com.Game.Game.modelsDB;
 
 public class Object {
 
+    private int obj_id;
     private String obj_name;
     private String used;
     private double lat;
@@ -10,6 +11,7 @@ public class Object {
     private String text2;
 
     public Object(){
+        obj_id = -1;
         obj_name = "";
         used = "no";
         lat = 0;
@@ -18,7 +20,8 @@ public class Object {
         text2 = "";
     }
 
-    public Object(String name1, String used1, double lat1, double lng1, String txt1, String txt2){
+    public Object(int id1, String name1, String used1, double lat1, double lng1, String txt1, String txt2){
+        obj_id = id1;
         obj_name = name1;
         used = used1;
         lat = lat1;
@@ -28,6 +31,9 @@ public class Object {
     }
 
 
+    public int getObjId(){
+        return obj_id;
+    }
     public String getObjName(){
         return obj_name;
     }
@@ -48,6 +54,9 @@ public class Object {
     }
 
 
+    public void setObjId(int id1){
+        obj_id = id1;
+    }
     public void setObjName(String name1){
         obj_name = name1;
     }

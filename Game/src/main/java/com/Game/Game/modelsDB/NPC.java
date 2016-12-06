@@ -2,6 +2,7 @@ package com.Game.Game.modelsDB;
 
 public class NPC {
 
+    private int npc_id;
     private String npc_name;
     private double lat;
     private double lng;
@@ -9,6 +10,7 @@ public class NPC {
     private String text2;
 
     public NPC(){
+        npc_id = -1;
         npc_name = "";
         lat = 0;
         lng = 0;
@@ -16,7 +18,8 @@ public class NPC {
         text2 = "";
     }
 
-    public NPC(String name1,  double lat1, double lng1, String txt1, String txt2){
+    public NPC(int id1, String name1,  double lat1, double lng1, String txt1, String txt2){
+        npc_id = id1;
         npc_name = name1;
         lat = lat1;
         lng = lng1;
@@ -25,6 +28,9 @@ public class NPC {
     }
 
 
+    public int getNPCId(){
+        return npc_id;
+    }
     public String getNPCName(){
         return npc_name;
     }
@@ -42,9 +48,8 @@ public class NPC {
     }
 
 
-    public void setNPCName(String name1){
-        npc_name = name1;
-    }
+    public void setNPCId(int id1){ npc_id = id1; }
+    public void setNPCName(String name1){ npc_name = name1; }
     public void setLat(double lat1){
         lat = lat1;
     }
