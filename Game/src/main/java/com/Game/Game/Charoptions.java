@@ -1,4 +1,4 @@
-package com.Game.Game.modelsDB;
+package com.Game.Game;
 
 
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.Game.Game.CharRequest;
-import com.Game.Game.R;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
