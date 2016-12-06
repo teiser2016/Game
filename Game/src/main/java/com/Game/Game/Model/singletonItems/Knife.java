@@ -13,7 +13,7 @@ public class Knife extends Item implements Serializable {
         this.itemDescription = description;
     }
 
-    @Override
+    /*@Override
     public String getItemName() {
         return itemName;
     }
@@ -42,6 +42,6 @@ public class Knife extends Item implements Serializable {
             out.print("You can't use this item here yet\n");
         }
     }
-    
+    */
 }
     

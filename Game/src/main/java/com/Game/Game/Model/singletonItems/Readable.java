@@ -13,7 +13,7 @@ public class Readable extends Item implements Serializable{
         this.itemDescription = description;
     }
 
-    @Override
+    /*@Override
     public String getItemName(){
         return itemName; 
     }
@@ -59,6 +59,6 @@ public class Readable extends Item implements Serializable{
             }
         }
         
-    }
+    }*/
     
 }

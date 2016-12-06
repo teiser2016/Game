@@ -13,7 +13,7 @@ import static com.google.android.gms.nearby.Nearby.Messages;
 public class Flashlight extends Item implements Serializable{
     private String itemName;
     private String itemDescription;
-    private Messages msg = new Messages();
+    /*private Messages msg = new Messages();
     
     public Flashlight(String name, String description){
 
@@ -48,7 +48,7 @@ public class Flashlight extends Item implements Serializable{
         Scanner cn = new Scanner(System.in);
         String itemName = cn.nextLine();
         Item item2 = currentLocation.getPlayer().getPlayerInventory().get(itemName);
-    }
+    }*/
 }
 
 

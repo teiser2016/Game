@@ -13,7 +13,7 @@ public class Purse extends Item implements Serializable{
         this.itemDescription = description;
     }
 
-    @Override
+    /*@Override
     public String getItemName(){
         return itemName; 
     }
@@ -74,6 +74,6 @@ public class Purse extends Item implements Serializable{
         else{
             out.print(" -This briefcase cannot be opened!\n");
         }
-    }
+    }*/
 }
     
