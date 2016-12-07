@@ -21,7 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class User extends AppCompatActivity implements View.OnClickListener {
+public class Userinfo extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextId;
     private Button buttonGet;
     private TextView textViewResult;
@@ -31,7 +31,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_userinfo);
 
         editTextId = (EditText) findViewById(R.id.editTextId);
         buttonGet = (Button) findViewById(R.id.buttonGet);
@@ -43,10 +43,10 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     private void getData() {
         String user_id = editTextId.getText().toString().trim();
         if (user_id.equals("")) {
-            Toast.makeText(User.this, "Please enter an id", Toast.LENGTH_LONG).show();
+            Toast.makeText(Userinfo.this, "Please enter an id", Toast.LENGTH_LONG).show();
             return;
         }
-        loading = ProgressDialog.show(User.this,"Please wait...","Fetching...",false,false);
+        loading = ProgressDialog.show(Userinfo.this,"Please wait...","Fetching...",false,false);
 
         String url = Config.DATA_URL+editTextId.getText().toString().trim();
 
@@ -60,7 +60,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(User.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(Userinfo.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
                     }
                 });
 
