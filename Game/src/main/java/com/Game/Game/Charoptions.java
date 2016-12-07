@@ -19,7 +19,9 @@ import org.json.JSONObject;
 public class Charoptions extends AppCompatActivity
 {
 
-
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private Button bChar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,15 +29,29 @@ public class Charoptions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charoptions);
 
-        final RadioGroup radioGroup=(RadioGroup) findViewById(R.id.bChar);
-        final RadioButton radioButton=(RadioButton) findViewById(R.id.bChar);
-        final Button bChar=(Button) findViewById(R.id.bChar);
+        addListenerOnButton();
+
+    }
+
+    public void addListenerOnButton() {
+
+        radioGroup = (RadioGroup) findViewById(R.id.char_id);
+        bChar = (Button) findViewById(R.id.bChar);
+
 
 
 
 
         bChar.setOnClickListener(new View.OnClickListener()
         {
+
+            // get selected radio button from radioGroup
+            int selectedId = radioGroup.getCheckedRadioButtonId();
+
+            // find the radiobutton by returned id
+            radioButton = (RadioButton) findViewById(selectedId);
+
+
             @Override
             public void onClick(View v)
             {

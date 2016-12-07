@@ -43,15 +43,15 @@
                     android:id="@+id/Mitsakos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Detective2"
+                    android:text="Detective1"
+                    android:checked="true"
                     android:textColor="#ffffff" />
 
                 <RadioButton
                     android:id="@+id/Apostolis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="Detective1"
+                    android:text="Detective2"
                     android:textColor="#ffffff" />
 
                 <RadioButton
