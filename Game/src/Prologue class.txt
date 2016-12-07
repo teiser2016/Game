@@ -1,0 +1,86 @@
+public class Prologue extends AppCompatActivity implements View.OnClickListener{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_prologue);
+
+        String text = "Hello Detective. There was a call made to your office about an hour ago from a woman, " +
+                "claiming her daughter has gone missing. \nShe says her daughter had been acting strange lately, " +
+                "as if she was afraid of something. She would lock herself in her house, wouldn't go outside " +
+                "unless it was necessary. She would always hurry and constantly look behind her shoulder. \nThe " +
+                "mother said when she finally confronted her daughter about her paranoid behaviour they ended up " +
+                "fighting and the girl stormed out of the house. That was the last time she saw her and that was " +
+                "two days ago. \nShe didn't call the police because she is afraid her daughter might be mixed in " +
+                "something illegal, so she decided to call your office for help. \nThe last place she was seen was " +
+                "in front of the coffee shop 'NAME'. ";
+
+        TextView tvPrologue = (TextView) findViewById(R.id.tvPrologue);
+        Button continueBtn = (Button) findViewById(R.id.prologueContinue);
+
+        continueBtn.setOnClickListener(this);
+
+        tvPrologue.setText(text);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        startActivity(new Intent(Prologue.this, MapDemoActivity.class));
+
+    }
+}
+
+=====================================================================================================
+sto .xml 
+=====================================================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_prologue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mysterygameapp.Prologue">
+
+    <TextView
+        android:id="@+id/prologueHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prologue"
+        android:textSize="25dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id = "@+id/prologueContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_alignParentBottom="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/prologueHeader"
+        android:layout_above="@+id/prologueContinue">
+
+        <TextView
+            android:id="@+id/tvPrologue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:textStyle="italic"/>
+
+
+    </ScrollView>
+
+</RelativeLayout>
