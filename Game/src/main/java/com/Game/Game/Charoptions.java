@@ -40,8 +40,6 @@ public class Charoptions extends AppCompatActivity
 
 
 
-
-
         bChar.setOnClickListener(new View.OnClickListener()
         {
 
