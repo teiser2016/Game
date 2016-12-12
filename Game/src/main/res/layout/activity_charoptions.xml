@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"><![CDATA[
+    tools:context=".Charoptions">
+
+    ]]>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:id="@+id/txt"
+        android:textSize="24sp"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif"
+        android:background="@color/common_google_signin_btn_text_dark_focused"
+        android:textColor="#ffffff" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_span="4"
+                android:padding="18dip"
+                android:text="Select your character"
+                android:textColor="#ffffff"
+                android:textSize="18dp" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioGroup
+                android:id="@+id/char_ides"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4" >
+
+                <RadioButton
+                    android:id="@+id/Apostolis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="#ffffff"
+                    android:text="Detective1" />
+
+                <RadioButton
+                    android:id="@+id/Mitsakos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective2"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Kaori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective3"
+                    android:textColor="#ffffff" />
+
+                <RadioButton
+                    android:id="@+id/Sta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Detective4"
+                    android:textColor="#ffffff" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:text="Show Player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bShow" />
+
+            <Button
+                android:id="@+id/bChar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Submit"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="122dp"
+                android:id="@+id/txtvar" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

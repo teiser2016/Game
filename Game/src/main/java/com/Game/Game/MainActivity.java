@@ -1,28 +1,25 @@
 package com.Game.Game;
 
+		import android.Manifest;
 		import android.app.Activity;
-		import android.app.ProgressDialog;
 		import android.content.Intent;
 		import android.content.IntentSender;
 		import android.content.pm.PackageManager;
 		import android.location.Location;
-		import android.os.AsyncTask;
 		import android.os.Bundle;
 		import android.support.v4.app.ActivityCompat;
 		import android.support.v7.app.AppCompatActivity;
 		import android.util.Log;
-		import android.webkit.WebView;
-		import android.widget.TextView;
 		import android.widget.Toast;
 
+		import com.Game.Game.handlers.CameraHandler;
+		import com.Game.Game.handlers.MarkersHandler;
 		import com.google.android.gms.common.ConnectionResult;
 		import com.google.android.gms.common.GooglePlayServicesUtil;
 		import com.google.android.gms.common.api.GoogleApiClient;
 		import com.google.android.gms.location.LocationListener;
 		import com.google.android.gms.location.LocationRequest;
 		import com.google.android.gms.location.LocationServices;
-		import com.google.android.gms.maps.CameraUpdate;
-		import com.google.android.gms.maps.CameraUpdateFactory;
 		import com.google.android.gms.maps.GoogleMap;
 		import com.google.android.gms.maps.OnMapReadyCallback;
 		import com.google.android.gms.maps.SupportMapFragment;
@@ -30,15 +27,6 @@ package com.Game.Game;
 		import com.google.android.gms.maps.model.Marker;
 		import com.google.android.gms.maps.model.MarkerOptions;
 
-		import java.io.BufferedReader;
-		import java.io.IOException;
-		import java.io.InputStream;
-		import java.io.InputStreamReader;
-		import java.net.HttpURLConnection;
-		import java.net.MalformedURLException;
-		import java.net.URL;
-
-		//import db.MongoConnection;
 		import permissions.dispatcher.NeedsPermission;
 		import permissions.dispatcher.RuntimePermissions;
 
@@ -46,7 +34,8 @@ package com.Game.Game;
 public class MainActivity extends AppCompatActivity implements
 		GoogleApiClient.ConnectionCallbacks,
 		GoogleApiClient.OnConnectionFailedListener,
-		LocationListener {
+		LocationListener,
+		GoogleMap.OnMarkerClickListener{
 
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
@@ -59,8 +48,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private String dbURL = "";
 	public static LatLng userLocation = null;
-	TextView tv;
-
+	public static LatLng virtualUser = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,9 +67,6 @@ public class MainActivity extends AppCompatActivity implements
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
 
-		//tv = (TextView) findViewById(R.id.tv);
-
-		//new MongoConnection(MainActivity.this).connect();
 	}
 
 	protected void loadMap(GoogleMap googleMap) {
@@ -182,12 +167,31 @@ public class MainActivity extends AppCompatActivity implements
 
 			userLocation = latLng;
 
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-			map.animateCamera(cameraUpdate);
+			new MarkersHandler().setMarkersOnMap(map);
+
+			new CameraHandler().setCamera(map, virtualUser);
+
+			map.setOnMarkerClickListener(this);
+
 		} else {
 			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
 		}
 		startLocationUpdates();
+	}
+
+	@Override
+	public boolean onMarkerClick(final Marker marker) {
+
+		Integer tag = (Integer) marker.getTag();
+
+		new MarkersHandler().highlightMarker(marker, tag);
+
+		LatLng latLng = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
+		//the marker clicked is the user's virtual location
+		virtualUser = latLng;
+
+		// Return false to indicate that we have not consumed the event and that we wish for the default behavior to occur
+		return false;
 	}
 
 	protected void startLocationUpdates() {
@@ -253,8 +257,5 @@ public class MainActivity extends AppCompatActivity implements
 					"Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
 		}
 	}
-
-
-
 
 }
