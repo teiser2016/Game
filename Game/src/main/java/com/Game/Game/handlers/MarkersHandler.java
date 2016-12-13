@@ -2,6 +2,7 @@ package com.Game.Game.handlers;
 
 import android.content.res.Resources;
 
+import com.Game.Game.FindEntityInfo;
 import com.Game.Game.MainActivity;
 import com.Game.Game.R;
 import com.Game.Game.modelsDB.NPC;
@@ -89,7 +90,7 @@ public class MarkersHandler extends MainActivity {
         String message;
 
         String title = marker.getTitle();
-        String type = findEntityType(title);
+        String type = FindEntityInfo.findType(title);
 
         switch (type) {
             case "object":
@@ -116,7 +117,7 @@ public class MarkersHandler extends MainActivity {
                 break;
             case "main":
                 String[] clueArray = res.getStringArray(R.array.objects_clues);
-                int id = findEntityID(title);
+                int id = FindEntityInfo.findID(title);
                 message = clueArray[id];
                 break;
             case "back":
@@ -140,7 +141,7 @@ public class MarkersHandler extends MainActivity {
                 break;
             case "main":
                 String[] clueArray = res.getStringArray(R.array.npcs_clues);
-                int id = findEntityID(title);
+                int id = FindEntityInfo.findID(title);
                 message = clueArray[id];
                 break;
             case "back":
@@ -153,44 +154,5 @@ public class MarkersHandler extends MainActivity {
 
         return message;
     }
-
-//============================================================================//
-    //SEARCH FOR OBJECTS OR NPCS IDENTITY OR TYPE
-
-    public int findEntityID (String title) {
-        ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
-        ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
-
-        int id = -1;
-
-        for (int i =0; i<5; i++) {
-
-            if ( title.equals(objs.get(i).getObjName()) ) {
-                id = objs.get(i).getObjId();
-            }
-            if ( title.equals(npcs.get(i).getNPCName()) ) {
-                id = npcs.get(i).getNPCId();
-            }
-        }
-
-        return id;
-    }
-
-    public String findEntityType (String title) {
-        ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
-        ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
-
-        for (int i =0; i<5; i++) {
-
-            if ( title.equals(objs.get(i).getObjName()) ) {
-                return "object";
-            }
-            if ( title.equals(npcs.get(i).getNPCName()) ) {
-                return "npc";
-            }
-        }
-        return null;
-    }
-
 
 }

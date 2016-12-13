@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements
 	public static LatLng userLocation = null;
 	public static LatLng virtualUser = null;
 
+	public static Marker userMarker;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -167,7 +169,9 @@ public class MainActivity extends AppCompatActivity implements
 
 			userLocation = latLng;
 
-			new MarkersHandler().setMarkersOnMap(map);
+			MarkersHandler markersHandler = new MarkersHandler();
+			userMarker = markersHandler.setUserOnMap(map, userLocation);
+			markersHandler.setMarkersOnMap(map);
 
 			new CameraHandler().setCamera(map, virtualUser);
 
@@ -180,15 +184,44 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	@Override
-	public boolean onMarkerClick(final Marker marker) {
+	public boolean onMarkerClick(Marker clickedMarker) {
+		MarkersHandler markersHandler = new MarkersHandler();
 
-		Integer tag = (Integer) marker.getTag();
+		LatLng clickedMarkerCoordinates = new LatLng(
+				clickedMarker.getPosition().latitude,
+				clickedMarker.getPosition().longitude);
 
-		new MarkersHandler().highlightMarker(marker, tag);
+		String title = clickedMarker.getTitle(); //get marker's title
+		String type = FindEntityInfo.findType(title);
+		int id = FindEntityInfo.findID(title); //find entity's id by the title
 
-		LatLng latLng = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
-		//the marker clicked is the user's virtual location
-		virtualUser = latLng;
+		int counter = 0; //must retrieve counter from database
+
+		if ( counter == 0 ) {   //marker clicked for the first time
+			//the marker clicked is the user's new position
+			userLocation = clickedMarkerCoordinates;
+			userMarker.remove();
+			userMarker = markersHandler.setUserOnMap(map, userLocation);
+			markersHandler.setInvisible(userMarker);
+
+			markersHandler.setOpacity(clickedMarker);
+
+			String greeting = markersHandler.getSnippetMessage(clickedMarker, getResources(), "greeting");
+			clickedMarker.setSnippet(greeting);
+
+			counter++;
+
+		} else if ( counter == 1 ) {
+			String mainMessage = markersHandler.getSnippetMessage(clickedMarker, getResources(), "main");
+			clickedMarker.setSnippet(mainMessage);
+
+			counter++;
+
+		} else {
+			markersHandler.setVisible(userMarker);
+			String messageBack = markersHandler.getSnippetMessage(clickedMarker, getResources(), "back");
+			clickedMarker.setSnippet(messageBack);
+		}
 
 		// Return false to indicate that we have not consumed the event and that we wish for the default behavior to occur
 		return false;
