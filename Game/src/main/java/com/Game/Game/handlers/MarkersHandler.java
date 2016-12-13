@@ -1,56 +1,196 @@
 package com.Game.Game.handlers;
 
+import android.content.res.Resources;
+
+import com.Game.Game.MainActivity;
+import com.Game.Game.R;
+import com.Game.Game.modelsDB.NPC;
+import com.Game.Game.modelsDB.Object;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MarkersHandler {
+import java.util.ArrayList;
+
+public class MarkersHandler extends MainActivity {
+
+    public Marker setUserOnMap(GoogleMap map, LatLng location){
+
+        Marker marker = map.addMarker(new MarkerOptions()
+                .position(location)
+                .title("user")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        );
+
+        return marker;
+    }
 
     public void setMarkersOnMap(GoogleMap map){
 
-        Marker m1 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(41.086316, 23.547215))
-                .title("1")
-        );
-        m1.setTag(1);
-        //markersList.add(m1);
+        ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
+        ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
+        Marker marker;
+        LatLng latLng;
 
-        Marker m2 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(41.086652, 23.546853))
-                .title("2")
-        );
-        m2.setTag(2);
-        //markersList.add(m2);
+        //objects
+        for (int i=0; i<5; i++) {
+            latLng = new LatLng(objs.get(i).getLat(), objs.get(i).getLng());
+            marker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(objs.get(i).getObjName())
+                    .snippet("You found a " + objs.get(i).getObjName())
+                    .visible(true)
+                    .alpha(1.0f)
+            );
+        }
 
-        Marker m3 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(41.086409, 23.546440))
-                .title("3")
-        );
-        m3.setTag(3);
-        //markersList.add(m3);
+        //npcs
+        for (int i=0; i<5; i++) {
+            latLng = new LatLng(npcs.get(i).getLat(), npcs.get(i).getLng());
+            marker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(npcs.get(i).getNPCName())
+                    .snippet("Hello Detective...\n" + "I am " + npcs.get(i).getNPCName())
+                    .visible(true)
+                    .alpha(1.0f)
+            );
+        }
 
-        Marker m4 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(41.086172, 23.546035))
-                .title("4")
-        );
-        m4.setTag(4);
-        //markersList.add(m4);
-
-        Marker m5 = map.addMarker(new MarkerOptions()
-                .position(new LatLng(41.086586, 23.545613))
-                .title("5")
-        );
-        m5.setTag(5);
-        //markersList.add(m5);
     }
 
     public void highlightMarker(Marker marker, Integer tag){
-
         if (tag != null) {
             marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         }
     }
+
+    public void setOpacity(Marker marker){
+        marker.setAlpha(0.4f);
+    }
+
+    public void removeMarker(Marker marker){
+        marker.remove();
+    }
+
+    public void setVisible(Marker marker) {
+        marker.setVisible(true);
+    }
+
+    public void setInvisible(Marker marker) {
+        marker.setVisible(false);
+    }
+
+//============================================================================//
+    //RETRIEVING THE CLUE MESSAGE FOR DISPLAY
+
+    public String getSnippetMessage (Marker marker, Resources res, String messageType) {
+        String message;
+
+        String title = marker.getTitle();
+        String type = findEntityType(title);
+
+        switch (type) {
+            case "object":
+                message = getObjMessage(title, res, messageType);
+                break;
+            case "npc":
+                message = getNpcMessage(title, res, messageType);
+                break;
+            default:
+                message = "";
+                break;
+        }
+
+        return message;
+    }
+
+    //RETRIEVE OBJECT MESSAGE FROM XML
+    public String getObjMessage (String title, Resources res, String messageType) {
+        String message;
+
+        switch (messageType) {
+            case "greeting":
+                message = res.getString(R.string.objectGreeting);
+                break;
+            case "main":
+                String[] clueArray = res.getStringArray(R.array.objects_clues);
+                int id = findEntityID(title);
+                message = clueArray[id];
+                break;
+            case "back":
+                message = res.getString(R.string.objectBack);
+                break;
+            default:
+                message = "";
+                break;
+        }
+
+        return message;
+    }
+
+    //RETRIEVE NPC MESSAGE FROM XML
+    public String getNpcMessage (String title, Resources res, String messageType) {
+        String message;
+
+        switch (messageType) {
+            case "greeting":
+                message = res.getString(R.string.npcGreeting);
+                break;
+            case "main":
+                String[] clueArray = res.getStringArray(R.array.npcs_clues);
+                int id = findEntityID(title);
+                message = clueArray[id];
+                break;
+            case "back":
+                message = res.getString(R.string.npcBack);
+                break;
+            default:
+                message = "";
+                break;
+        }
+
+        return message;
+    }
+
+//============================================================================//
+    //SEARCH FOR OBJECTS OR NPCS IDENTITY OR TYPE
+
+    public int findEntityID (String title) {
+        ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
+        ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
+
+        int id = -1;
+
+        for (int i =0; i<5; i++) {
+
+            if ( title.equals(objs.get(i).getObjName()) ) {
+                id = objs.get(i).getObjId();
+            }
+            if ( title.equals(npcs.get(i).getNPCName()) ) {
+                id = npcs.get(i).getNPCId();
+            }
+        }
+
+        return id;
+    }
+
+    public String findEntityType (String title) {
+        ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
+        ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
+
+        for (int i =0; i<5; i++) {
+
+            if ( title.equals(objs.get(i).getObjName()) ) {
+                return "object";
+            }
+            if ( title.equals(npcs.get(i).getNPCName()) ) {
+                return "npc";
+            }
+        }
+        return null;
+    }
+
 
 }

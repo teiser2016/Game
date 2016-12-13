@@ -26,7 +26,11 @@
     </string-array>
 
     <string name="defaultClue">No clue found...</string>
-    <string name="hello">Hello Detective...</string>
-    <string name="welcome_back">Welcome back Detective...</string>
+
+    <string name="objectGreeting"></string>
+    <string name="npcGreeting"></string>
+
+    <string name="objectBack"></string>
+    <string name="npcBack"></string>
 
 </resources>
