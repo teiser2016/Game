@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements
 	public static LatLng userLocation = null;
 	public static LatLng virtualUser = null;
 
+	public static Marker userMarker;
+	public static Marker currentVisitedMarker;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -167,7 +170,9 @@ public class MainActivity extends AppCompatActivity implements
 
 			userLocation = latLng;
 
-			new MarkersHandler().setMarkersOnMap(map);
+			MarkersHandler markersHandler = new MarkersHandler();
+			userMarker = markersHandler.setUserOnMap(map, userLocation);
+			markersHandler.setMarkersOnMap(map);
 
 			new CameraHandler().setCamera(map, virtualUser);
 
@@ -180,15 +185,49 @@ public class MainActivity extends AppCompatActivity implements
 	}
 
 	@Override
-	public boolean onMarkerClick(final Marker marker) {
+	public boolean onMarkerClick(Marker clickedMarker) {
+		currentVisitedMarker = clickedMarker;
 
-		Integer tag = (Integer) marker.getTag();
+		MarkersHandler markersHandler = new MarkersHandler();
 
-		new MarkersHandler().highlightMarker(marker, tag);
+		LatLng clickedMarkerCoordinates = new LatLng(
+				clickedMarker.getPosition().latitude,
+				clickedMarker.getPosition().longitude);
 
-		LatLng latLng = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
-		//the marker clicked is the user's virtual location
-		virtualUser = latLng;
+		String title = clickedMarker.getTitle(); //get marker's title
+
+		//if the user is not clicking on the userMarker...
+		if (!title.equals("user")){
+
+			String type = FindEntityInfo.findType(title);
+			int id = FindEntityInfo.findID(title); //find entity's id by the title
+
+			int counter = 0; //retrieve appropriate counter //SingletonData.getCounters(type).get(id)
+
+			if (  counter == 0 ) {   //marker clicked for the first time
+
+				markersHandler.startInteraction(clickedMarker, id, type);
+				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "greeting") );
+
+			} else if ( counter == 1 ) {
+
+				//the marker double clicked will be the user's new position
+				userLocation = clickedMarkerCoordinates;
+				//update userMarker -> set on map and hide until interaction is terminated
+				userMarker = markersHandler.updateUserMarker(map, userMarker, userLocation);
+
+				markersHandler.interactionMode(clickedMarker, id, type);
+				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "main") );
+
+			} else {
+
+				markersHandler.terminateInteraction(clickedMarker, userMarker, id, type);
+				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "back") );
+				markersHandler.setVisible(userMarker);
+
+			}
+
+		}
 
 		// Return false to indicate that we have not consumed the event and that we wish for the default behavior to occur
 		return false;
