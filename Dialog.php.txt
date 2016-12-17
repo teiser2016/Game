@@ -1,0 +1,24 @@
+<?php
+    $con = mysqli_connect("localhost", "id188811_user", "teiser2016", "id188811_teiser2016");
+    
+   
+   
+    $text1 = $_POST["text1"];
+    $text2 = $_POST["text2"];
+    
+    $statement = mysqli_prepare($con, "SELECT * FROM NPC ");
+    
+    mysqli_stmt_execute($statement);
+    
+    mysqli_stmt_store_result($statement);
+    mysqli_stmt_bind_result($statement,  $text1, $text2);
+    
+    $response = array();
+    $response["success"] = false;  
+    
+    while(mysqli_stmt_fetch($statement)){
+        $response["success"] = true;
+	$response["text1"] =  $text1;  
+        $response["text2"] =  $text2;
+    }
+?>
