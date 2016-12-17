@@ -6,11 +6,13 @@
     $text1 = $_POST["text1"];
     $text2 = $_POST["text2"];
     
-    $statement = mysqli_prepare($con, "SELECT * FROM NPC ");
     
+    $statement = mysqli_prepare($con, "SELECT * FROM user ");
+    mysqli_stmt_bind_result($statement,  $count);
     mysqli_stmt_execute($statement);
     
     mysqli_stmt_store_result($statement);
+   $statement = mysqli_prepare($con, "SELECT * FROM NPC ");
     mysqli_stmt_bind_result($statement,  $text1, $text2);
     
     $response = array();
@@ -18,6 +20,7 @@
     
     while(mysqli_stmt_fetch($statement)){
         $response["success"] = true;
+	$response["text2"] =  $count;
 	$response["text1"] =  $text1;  
         $response["text2"] =  $text2;
     }
