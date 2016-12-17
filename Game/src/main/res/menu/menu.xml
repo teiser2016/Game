@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_back"
+        android:title="Back"
+        android:icon="@drawable/ic_action_left_arrow"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item_zoom_in"
+        android:title="Zoom In"
+        android:icon="@drawable/ic_action_zoom_in"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_zoom_out"
+        android:title="Zoom Out"
+        android:icon="@drawable/ic_action_zoom_out"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_options"
+        android:title="Options"
+        android:icon="@drawable/ic_action_options"
+        app:showAsAction="always">
+
+        <item
+            android:id="@+id/item_userinfo"
+            android:title="User's info"
+            app:showAsAction="always"/>
+
+        <item
+            android:id="@+id/item_charoptions"
+            android:title="Show character's info"
+            app:showAsAction="always"/>
+
+
+        <item
+            android:id="@+id/item_settings"
+            android:title="Settings"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/item_save"
+            android:title="Save game"
+            app:showAsAction="always"/>
+
+
+    </item>
+
+
+</menu>
