@@ -15,6 +15,7 @@
    $statement = mysqli_prepare($con, "SELECT * FROM NPC ");
     mysqli_stmt_bind_result($statement,  $text1, $text2);
     
+    
     $response = array();
     $response["success"] = false;  
     
