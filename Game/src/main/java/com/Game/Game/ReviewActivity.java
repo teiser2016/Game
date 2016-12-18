@@ -1,18 +1,17 @@
 package com.Game.Game;
 
-
-        import android.app.Activity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ReviewActivity extends Activity {
 
 
-    static String USER_REVIEW;
+    static String USER_REVIEW = "user_review";
 
 
     @Override
