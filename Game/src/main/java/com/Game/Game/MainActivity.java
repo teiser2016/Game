@@ -12,6 +12,8 @@ package com.Game.Game;
 		import android.util.Log;
 		import android.widget.Toast;
 
+		import com.Game.Game.functions.FindEntityInfo;
+		import com.Game.Game.functions.NearbySearch;
 		import com.Game.Game.handlers.CameraHandler;
 		import com.Game.Game.handlers.MarkersHandler;
 		import com.google.android.gms.common.ConnectionResult;

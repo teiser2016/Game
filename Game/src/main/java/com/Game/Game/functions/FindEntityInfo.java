@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.functions;
 
 import com.Game.Game.modelsDB.NPC;
 import com.Game.Game.modelsDB.Object;

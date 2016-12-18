@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.functions;
 
 import android.location.Location;
 
