@@ -1,4 +1,8 @@
+/*   min ta bgalete apo ta sxolia... einai mia dokimi gia to pos 8a mporousame na kanouem to save
+
+
 package com.Game.Game;
+
 
 
 import android.content.Intent;
@@ -48,6 +52,7 @@ public class SaveLoadExample1 {
      * This callback will be triggered after you call startActivityForResult from the
      * showSavedGamesUI method.
      */
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent intent) {
@@ -96,6 +101,7 @@ public class SaveLoadExample1 {
      * Conflict resolution for when Snapshots are opened.  Must be run in an AsyncTask or in a
      * background thread,
      */
+/*
     Snapshot processSnapshotOpenResult(Snapshots.OpenSnapshotResult result, int retryCount) {
         Snapshot mResolvedSnapshot = null;
         retryCount++;
