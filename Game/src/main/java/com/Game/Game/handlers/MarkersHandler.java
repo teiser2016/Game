@@ -2,7 +2,7 @@ package com.Game.Game.handlers;
 
 import android.content.res.Resources;
 
-import com.Game.Game.FindEntityInfo;
+import com.Game.Game.functions.FindEntityInfo;
 import com.Game.Game.MainActivity;
 import com.Game.Game.R;
 import com.Game.Game.modelsDB.NPC;

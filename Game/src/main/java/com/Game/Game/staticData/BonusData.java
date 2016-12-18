@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.staticData;
 
 import com.Game.Game.modelsDB.Bonus;
 
