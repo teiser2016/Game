@@ -27,6 +27,11 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/item_review"
+        android:title="Write review"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/item_options"
         android:title="Options"
         android:icon="@drawable/ic_action_options"

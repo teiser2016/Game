@@ -1,28 +1,28 @@
 package com.Game.Game;
 
 
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.Menu;
-        import android.view.MenuInflater;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.Toast;
-        import android.widget.Toolbar;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
-        import com.Game.Game.LoginActivity;
-        import com.Game.Game.RegisterActivity;
+import com.Game.Game.LoginActivity;
+import com.Game.Game.RegisterActivity;
 
-        import static com.Game.Game.R.id.item_zoom_in;
-        import static com.Game.Game.R.id.item_zoom_out;
-        import static com.Game.Game.R.id.item_userinfo;
-        import static com.Game.Game.R.id.item_charoptions;
-        import static com.Game.Game.R.id.item_settings;
-        import static com.Game.Game.R.id.item_save;
-        import static com.Game.Game.R.id.item_back;
-
+import static com.Game.Game.R.id.item_zoom_in;
+import static com.Game.Game.R.id.item_zoom_out;
+import static com.Game.Game.R.id.item_userinfo;
+import static com.Game.Game.R.id.item_charoptions;
+import static com.Game.Game.R.id.item_settings;
+import static com.Game.Game.R.id.item_save;
+import static com.Game.Game.R.id.item_back;
+import static com.Game.Game.R.id.item_review;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -94,6 +94,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 case item_save:
                     Toast.makeText(HomeActivity.this, "Save game", Toast.LENGTH_SHORT).show();
                     return true;
+
+                case item_review:
+                    Toast.makeText(HomeActivity.this, "Write review", Toast.LENGTH_SHORT).show();
+                    return true;
+                startActivity(new Intent(HomeActivity.this, ReviewActivity.class));
+                break;
 
                 default:
                     return super.OnOptionsItemSelected(item);
