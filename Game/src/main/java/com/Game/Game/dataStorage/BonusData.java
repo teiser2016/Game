@@ -1,3 +1,9 @@
+package com.Game.Game.dataStorage;
+
+import com.Game.Game.modelsDB.Bonus;
+
+import java.util.ArrayList;
+
 public class BonusData {
 
     private static ArrayList<Bonus> bonuses = new ArrayList<>();

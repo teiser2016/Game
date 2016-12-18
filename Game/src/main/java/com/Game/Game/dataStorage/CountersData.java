@@ -1,16 +1,26 @@
+package com.Game.Game.dataStorage;
+
+import java.util.ArrayList;
+
 public class CountersData {
 
     private static ArrayList<Integer> objCounters = new ArrayList<>();
     private static ArrayList<Integer> npcCounters = new ArrayList<>();
     private static ArrayList<Integer> bonusCounters = new ArrayList<>();
 
-    public static void setCounters () {
-        for (int i = 0; i < 5; i++) { objCounters.add(0); }
-        for (int i = 0; i < 5; i++) { npcCounters.add(0); }
-        for (int i = 0; i < 5; i++) { bonusCounters.add(0); }
+    public static void setCounters() {
+        for (int i = 0; i < 5; i++) {
+            objCounters.add(0);
+        }
+        for (int i = 0; i < 5; i++) {
+            npcCounters.add(0);
+        }
+        for (int i = 0; i < 5; i++) {
+            bonusCounters.add(0);
+        }
     }
 
-    public static ArrayList<Integer> getCounters (String type) {
+    public static ArrayList<Integer> getCounters(String type) {
 
         switch (type) {
             case "object":
@@ -24,7 +34,7 @@ public class CountersData {
         }
     }
 
-    public static void setCounter (String type, int pos, int value) {
+    public static void setCounter(String type, int pos, int value) {
 
         switch (type) {
             case "object":
@@ -41,7 +51,7 @@ public class CountersData {
         }
     }
 
-    public static int getCounter (String type, int pos) {
+    public static int getCounter(String type, int pos) {
 
         switch (type) {
             case "object":
@@ -55,7 +65,7 @@ public class CountersData {
         }
     }
 
-public static void incrementCounter (String type, int pos) {
+    public static void incrementCounter(String type, int pos) {
         int count;
 
         switch (type) {
@@ -79,7 +89,7 @@ public static void incrementCounter (String type, int pos) {
         }
     }
 
-    public static void decrementObjCounter (String type, int pos) {
+    public static void decrementObjCounter(String type, int pos) {
         int count;
 
         switch (type) {
@@ -102,3 +112,4 @@ public static void incrementCounter (String type, int pos) {
                 break;
         }
     }
+}
