@@ -29,8 +29,11 @@
 
     <string name="objectGreeting"></string>
     <string name="npcGreeting"></string>
+    <string name="bonusGreeting"></string>
 
     <string name="objectBack"></string>
     <string name="npcBack"></string>
+
+    <string name="bonusTaken"></string>
 
 </resources>

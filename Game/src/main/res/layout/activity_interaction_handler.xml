@@ -11,4 +11,40 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.Game.Game.handlers.InteractionHandler">
 
+    <TextView
+        android:id="@+id/tvInteractionGreeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textStyle="italic"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textAlignment="gravity"/>
+
+    <Button
+        android:id="@+id/bShowClue1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInteractionGreeting"
+        android:layout_marginTop="30dp"
+        android:text="Show Me First Clue..."/>
+
+    <Button
+        android:id="@+id/bShowClue2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bShowClue1"
+        android:layout_marginTop="15dp"
+        android:text="Show Me Second Clue..."/>
+
+    <Button
+        android:id="@+id/bInteractionReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bShowClue2"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:text="Return"/>
+
 </RelativeLayout>
