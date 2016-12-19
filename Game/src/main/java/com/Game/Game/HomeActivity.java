@@ -42,16 +42,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean OnCreateOptionsMenu(Menu menu){
+    public boolean OnCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
+        inflater.inflate(R.menu.menu, menu);
         return super.OnCreateOptionsMenu(menu);
     }
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.Login:
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         @Override
-        public boolean OnOptionsItemSelected( MenuItem item){
+        public boolean OnOptionsItemSelected (MenuItem item){
             switch (item.getItemId()) {
                 case item_zoom_in:
                     Toast.makeText(HomeActivity.this, "Zoom in", Toast.LENGTH_SHORT).show();
@@ -106,4 +106,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+}
 

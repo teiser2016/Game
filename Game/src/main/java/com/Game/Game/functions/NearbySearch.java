@@ -22,7 +22,7 @@ public class NearbySearch {
     Object foundEntity = null;
 
     //Constructor
-    NearbySearch (LatLng user){
+    public NearbySearch(LatLng user){
         this.userLocation = user;
     }
 

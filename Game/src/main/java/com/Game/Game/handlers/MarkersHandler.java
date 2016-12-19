@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import com.Game.Game.functions.FindEntityInfo;
 import com.Game.Game.MainActivity;
 import com.Game.Game.R;
+import com.Game.Game.modelsDB.Bonus;
 import com.Game.Game.modelsDB.NPC;
 import com.Game.Game.modelsDB.Object;
 import com.Game.Game.modelsDB.User;
@@ -21,24 +22,20 @@ public class MarkersHandler extends MainActivity {
 //============================================================================//
     //DISPLAYING MARKERS
 
-    //CALLED ONCONNECTED
-    public Marker setUserOnMap(GoogleMap map, LatLng location){
+    //CALLED ON ON_CONNECTED AND ON_CLICK
+    public Marker setUserOnMap(GoogleMap map, LatLng location, Marker user){
 
-        Marker marker = map.addMarker(new MarkerOptions()
+        if (user != null) {
+            user.remove();
+        }
+
+        user = map.addMarker(new MarkerOptions()
                 .position(location)
                 .title("user")
+                .snippet("This is Me...")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         );
-        marker.showInfoWindow();
-
-        return marker;
-    }
-
-    //CALLED ONMARKERCLICK (first time click)
-    public Marker updateUserMarker(GoogleMap map, Marker user, LatLng newLocation){
-        user.remove();
-        user = setUserOnMap(map, newLocation);
-        setInvisible(user);
+        user.showInfoWindow();
 
         return user;
     }
@@ -48,6 +45,7 @@ public class MarkersHandler extends MainActivity {
 
         ArrayList<Object> objs = new ArrayList<>(); //have to retrieve the objects in this arraylist
         ArrayList<NPC> npcs = new ArrayList<>(); //have to retrieve the npcs in this arraylist
+        ArrayList<Bonus> bonus = new ArrayList<>(); //have to retrieve the bonus in this arraylist
         Marker marker;
         LatLng latLng;
 
@@ -57,10 +55,10 @@ public class MarkersHandler extends MainActivity {
             marker = map.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(objs.get(i).getObjName())
-                    .snippet("You found a " + objs.get(i).getObjName())
-                    .visible(true)
+                    .visible(false)
                     .alpha(1.0f)
             );
+            //MarkersData.setMarker(marker, "object");
         }
 
         //npcs
@@ -69,10 +67,23 @@ public class MarkersHandler extends MainActivity {
             marker = map.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(npcs.get(i).getNPCName())
-                    .snippet("Hello Detective...\n" + "I am " + npcs.get(i).getNPCName())
-                    .visible(true)
+                    .visible(false)
                     .alpha(1.0f)
             );
+            //MarkersData.setMarker(marker, "npc");
+        }
+
+        //bonus
+        for (int i=0; i<5; i++) {
+            latLng = new LatLng(bonus.get(i).getLat(), bonus.get(i).getLng());
+            marker = map.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(bonus.get(i).getName())
+                    .visible(true)
+                    .alpha(0.4f)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+            );
+            //MarkersData.setMarker(marker, "bonus");
         }
 
     }
@@ -101,11 +112,9 @@ public class MarkersHandler extends MainActivity {
             marker = npcMarkers.get(i);
             setInvisible(marker);
         }
-
-        displayNextEntity(userCount, currentMarker, user);
     }
 
-    public void displayNextEntity (int userCount, Marker currentMarker, Marker user) {
+    public void displayNextEntity (GoogleMap map, int userCount) {
         ArrayList<Marker> objMarkers = new ArrayList<>(); //retrieve object markers
         ArrayList<Marker> npcMarkers = new ArrayList<>(); //retrieve npc markers
 
@@ -114,89 +123,72 @@ public class MarkersHandler extends MainActivity {
 
         Marker nextMarker;
         int id;
-        int markerCount = 0;
 
         switch (userCount) {
             case 0:
                 id = 0;
                 nextMarker = npcMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = npcCounters.get(id);
                 break;
 
             case 1:
                 id = 0;
                 nextMarker = objMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = objCounters.get(id);
                 break;
 
             case 2:
                 id = 1;
                 nextMarker = npcMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = npcCounters.get(id);
                 break;
 
             case 3:
                 id = 1;
                 nextMarker = objMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = objCounters.get(id);
                 break;
 
             case 4:
                 id = 2;
                 nextMarker = npcMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = npcCounters.get(id);
                 break;
 
             case 5:
                 id = 2;
                 nextMarker = objMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = objCounters.get(id);
                 break;
 
             case 6:
                 id = 3;
                 nextMarker = npcMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = npcCounters.get(id);
                 break;
 
             case 7:
                 id = 3;
                 nextMarker = objMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = objCounters.get(id);
                 break;
 
             case 8:
                 id = 4;
                 nextMarker = npcMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = npcCounters.get(id);
                 break;
 
             case 9:
                 id = 4;
                 nextMarker = objMarkers.get(id);
-                setVisible(nextMarker);
-                markerCount = objCounters.get(id);
                 break;
 
             default:
+                //on default go to first
+                id = 0;
+                nextMarker = npcMarkers.get(id);
                 break;
         }
 
-        if (markerCount > 2) {
-            setInvisible(currentMarker); //hide current marker
-        }
-
-        //setInvisible(currentMarker); //hide current marker
-        setVisible(user); //display user on map
+        //setting next marker on map
+        nextMarker = map.addMarker(new MarkerOptions()
+                .position(nextMarker.getPosition())
+                .title(nextMarker.getTitle())
+                .snippet("This is Next Location...")
+        );
+        nextMarker.showInfoWindow();
     }
 
 //============================================================================//
@@ -221,108 +213,6 @@ public class MarkersHandler extends MainActivity {
 
     public void setInvisible(Marker marker) {
         marker.setVisible(false);
-    }
-
-//============================================================================//
-    //INTERACTION
-
-    public void startInteraction (Marker currentMarker, int pos, String type) {
-
-        currentMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        //incrementCounter(type, pos);
-    }
-
-    public void interactionMode (Marker currentMarker, int pos, String type) {
-        User user = new User(); //retrieve user data
-
-        int bonusValue = 0; //get bonus value
-
-        int bonusUser = user.getBonus() + bonusValue;
-        user.setBonus(bonusUser);
-
-        //incrementCounter(type, pos);
-        //incrementUserCount();
-    }
-
-    public void terminateInteraction(Marker currentMarker, Marker user, int pos, String type) {
-        User userData = new User(); //retrieve user data
-
-        displayNextEntity(userData.getCount(), currentMarker, user);
-
-        //if it is bonus, hide it
-        setInvisible(currentMarker);
-    }
-
-//============================================================================//
-    //RETRIEVING THE CLUE MESSAGE FOR DISPLAY
-
-    public String getSnippetMessage (Marker marker, Resources res, String messageType) {
-        String message;
-
-        String title = marker.getTitle();
-        String type = FindEntityInfo.findType(title);
-
-        switch (type) {
-            case "object":
-                message = getObjMessage(title, res, messageType);
-                break;
-            case "npc":
-                message = getNpcMessage(title, res, messageType);
-                break;
-            default:
-                message = "";
-                break;
-        }
-
-        return message;
-    }
-
-    //RETRIEVE OBJECT MESSAGE FROM XML
-    public String getObjMessage (String title, Resources res, String messageType) {
-        String message;
-
-        switch (messageType) {
-            case "greeting":
-                message = res.getString(R.string.objectGreeting);
-                break;
-            case "main":
-                String[] clueArray = res.getStringArray(R.array.objects_clues);
-                int id = FindEntityInfo.findID(title);
-                message = clueArray[id];
-                break;
-            case "back":
-                message = res.getString(R.string.objectBack);
-                break;
-            default:
-                message = "";
-                break;
-        }
-
-        return message;
-    }
-
-    //RETRIEVE NPC MESSAGE FROM XML
-    public String getNpcMessage (String title, Resources res, String messageType) {
-        String message;
-
-        switch (messageType) {
-            case "greeting":
-                message = res.getString(R.string.npcGreeting);
-                break;
-            case "main":
-                String[] clueArray = res.getStringArray(R.array.npcs_clues);
-                int id = FindEntityInfo.findID(title);
-                message = clueArray[id];
-                break;
-            case "back":
-                message = res.getString(R.string.npcBack);
-                break;
-            default:
-                message = "";
-                break;
-        }
-
-        return message;
     }
 
 }

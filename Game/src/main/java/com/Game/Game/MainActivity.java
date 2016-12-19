@@ -15,6 +15,7 @@ package com.Game.Game;
 		import com.Game.Game.functions.FindEntityInfo;
 		import com.Game.Game.functions.NearbySearch;
 		import com.Game.Game.handlers.CameraHandler;
+		import com.Game.Game.handlers.InteractionHandler;
 		import com.Game.Game.handlers.MarkersHandler;
 		import com.google.android.gms.common.ConnectionResult;
 		import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -48,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements
 
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
-	private String dbURL = "";
 	public static LatLng userLocation = null;
-	public static LatLng virtualUser = null;
 
 	public static Marker userMarker;
 	public static Marker currentVisitedMarker;
@@ -170,13 +169,24 @@ public class MainActivity extends AppCompatActivity implements
 			Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
 			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-			userLocation = latLng;
-
 			MarkersHandler markersHandler = new MarkersHandler();
-			userMarker = markersHandler.setUserOnMap(map, userLocation);
-			markersHandler.setMarkersOnMap(map);
 
-			new CameraHandler().setCamera(map, virtualUser);
+			int userCount = 0; //retrieve user's count
+
+			//user first time in the game
+			if ( (userMarker==null) && (userLocation==null) && (userCount==0) ) {
+				markersHandler.setMarkersOnMap(map);
+				userLocation = latLng;
+				userMarker = markersHandler.setUserOnMap(map, userLocation, userMarker);
+				markersHandler.displayNextEntity(map, userCount);
+
+			} else {
+				markersHandler.setMarkersOnMap(map);
+				markersHandler.displayNextEntity(map, userCount);
+				userMarker = markersHandler.setUserOnMap(map, userLocation, userMarker);
+			}
+
+			new CameraHandler().setCamera(map, userLocation);
 
 			map.setOnMarkerClickListener(this);
 
@@ -192,43 +202,23 @@ public class MainActivity extends AppCompatActivity implements
 
 		MarkersHandler markersHandler = new MarkersHandler();
 
-		LatLng clickedMarkerCoordinates = new LatLng(
-				clickedMarker.getPosition().latitude,
-				clickedMarker.getPosition().longitude);
+		//the marker clicked will be the user's new position
+		userLocation = new LatLng( clickedMarker.getPosition().latitude, clickedMarker.getPosition().longitude);
+		//update userMarker -> update userMarker and set on map
+		userMarker = markersHandler.setUserOnMap(map, userLocation, userMarker);
 
 		String title = clickedMarker.getTitle(); //get marker's title
 
 		//if the user is not clicking on the userMarker...
 		if (!title.equals("user")){
 
-			String type = FindEntityInfo.findType(title);
-			int id = FindEntityInfo.findID(title); //find entity's id by the title
+			String markerType = FindEntityInfo.findType(title);
+			int markerId = FindEntityInfo.findID(title); //find entity's id by the title
 
-			int counter = 0; //retrieve appropriate counter //SingletonData.getCounters(type).get(id)
-
-			if (  counter == 0 ) {   //marker clicked for the first time
-
-				markersHandler.startInteraction(clickedMarker, id, type);
-				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "greeting") );
-
-			} else if ( counter == 1 ) {
-
-				//the marker double clicked will be the user's new position
-				userLocation = clickedMarkerCoordinates;
-				//update userMarker -> set on map and hide until interaction is terminated
-				userMarker = markersHandler.updateUserMarker(map, userMarker, userLocation);
-
-				markersHandler.interactionMode(clickedMarker, id, type);
-				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "main") );
-
-			} else {
-
-				markersHandler.terminateInteraction(clickedMarker, userMarker, id, type);
-				clickedMarker.setSnippet( markersHandler.getSnippetMessage(clickedMarker, getResources(), "back") );
-				markersHandler.setVisible(userMarker);
-
-			}
-
+			Intent intent = new Intent(MainActivity.this, InteractionHandler.class);
+			intent.putExtra("markerId", markerId);
+			intent.putExtra("markerType", markerType);
+			startActivity(intent);
 		}
 
 		// Return false to indicate that we have not consumed the event and that we wish for the default behavior to occur
