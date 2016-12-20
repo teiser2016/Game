@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class Charoptions extends AppCompatActivity
 {
-
+    public String Cd;
 
 
     @Override
@@ -27,6 +27,8 @@ public class Charoptions extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charoptions);
+
+
 
         final RadioGroup char_ides=(RadioGroup) findViewById(R.id.char_ides);
         final Button bChar=(Button) findViewById(R.id.bChar);
@@ -40,6 +42,8 @@ public class Charoptions extends AppCompatActivity
 
         bShow.setOnClickListener(new View.OnClickListener()
         {
+
+
             @Override
             public void onClick(View v)
             {
@@ -52,7 +56,7 @@ public class Charoptions extends AppCompatActivity
                 else if(Sta.isChecked())
                 {txtvar.setText("Sta");}
                 final String char_name = txtvar.getText().toString();
-
+                final String user_name = RegisterActivity.getVariable();
                 Response.Listener<String> responseListener = new Response.Listener<String>()
                 {
                     @Override
@@ -69,8 +73,8 @@ public class Charoptions extends AppCompatActivity
                                 String lastname = jsonResponse.getString("char_lastname");
                                 String prof = jsonResponse.getString("profession");
                                 String Chid = jsonResponse.getString("char_id");
-
-                                txt.setText(Chid +  char_name +  lastname  +  xronia  +  prof   );
+                                Cd = Chid;
+                                txt.setText(Chid +  char_name +  lastname  +  xronia  +  prof  );
                             } else {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(Charoptions.this);
                                 builder.setMessage("Choose one Char")
@@ -93,13 +97,18 @@ public class Charoptions extends AppCompatActivity
                     }
                 });
 
-                    CharRequest charrequest = new CharRequest(char_name,responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
-                    queue.add(charrequest);
-                }
-            });
-        }
+                CharRequest charrequest = new CharRequest(char_name,responseListener);
+                RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
+                queue.add(charrequest);
+
+
+                CharToUser chartouser = new CharToUser(Cd,user_name,responseListener);
+                RequestQueue queue2 = Volley.newRequestQueue(Charoptions.this);
+                queue2.add(chartouser);
+            }
+        });
     }
+}
 
 
 

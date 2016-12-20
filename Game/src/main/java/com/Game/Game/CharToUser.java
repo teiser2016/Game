@@ -1,7 +1,5 @@
 package com.Game.Game;
 
-import android.content.Intent;
-import com.Game.Game.Charoptions;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
@@ -15,14 +13,15 @@ public class CharToUser extends StringRequest {
 
 
 
-    public CharToUser(Response.Listener<String> listener)
+    public CharToUser(String Cd,String user_name,Response.Listener<String> listener)
     {
         super(Method.POST, CHARTOUSER_URL, listener, null);
         params = new HashMap<>();
-        params.put(char_ide);
-
-
+        params.put("char_id",Cd);
+        params.put("username",user_name);
     }
+
+
 
     @Override
     public Map<String, String> getParams()
