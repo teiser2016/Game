@@ -44,9 +44,8 @@ public class Charoptions extends AppCompatActivity
             public void onClick(View v)
             {
                 if(Apostolis.isChecked())
-                {
-                    txtvar.setText("Apostolis");
-                }else if(Mitsakos.isChecked())
+                {txtvar.setText("Apostolis");}
+                else if(Mitsakos.isChecked())
                 {txtvar.setText("Mitsakos");}
                 else if(Kaori.isChecked())
                 {txtvar.setText("Kaori");}
@@ -94,13 +93,13 @@ public class Charoptions extends AppCompatActivity
                     }
                 });
 
-                CharRequest charrequest = new CharRequest(char_name,responseListener);
-                RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
-                queue.add(charrequest);
-            }
-        });
+                    CharRequest charrequest = new CharRequest(char_name,responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(Charoptions.this);
+                    queue.add(charrequest);
+                }
+            });
+        }
     }
-}
 
 
 
