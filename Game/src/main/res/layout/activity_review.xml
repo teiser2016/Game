@@ -27,5 +27,7 @@
         android:layout_height="60dp"
         android:layout_below="@+id/editText1"
         android:hint="review"
-        android:text="review" />
+        android:text="review"
+        android:id="@+id/review" />
+
 </LinearLayout>

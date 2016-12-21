@@ -9,6 +9,8 @@
     <string name="edit_hint">Enter Nickname</string>
     <string name="text_title">Nickname is:</string>
 
+    <string name="button">Submit</string>
+
     <string-array name="objects_clues">
         <item>object clue0...</item>
         <item>object clue1...</item>
