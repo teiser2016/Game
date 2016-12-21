@@ -1,0 +1,97 @@
+public class ObjectsData {
+
+    private static ArrayList<Object> objects = new ArrayList<>();
+
+    public static void setObjects () {
+	//get objects from database and add them in the objects arraylist above
+        //objects.add(new Object()); 
+    }
+
+    public static ArrayList<Object> getObjects () {
+        return objects;
+    }
+
+    public static Object getObject (int pos) { return objects.get(pos); }
+
+}
+
+======================
+
+public class NPCsData {
+
+    private static ArrayList<NPC> npcs = new ArrayList<>();
+
+    public static void setNpcs () {
+	//get npcs from database and add them in the npcs arraylist above
+        //npcs.add(new NPC());
+    }
+
+    public static ArrayList<NPC> getNPCs () {
+        return npcs;
+    }
+
+    public static NPC getNPC (int pos) {
+        return npcs.get(pos);
+    }
+
+}
+
+======================
+
+public class MarkersData {
+
+    private static ArrayList<Marker> objMarkers = new ArrayList<>();
+    private static ArrayList<Marker> npcMarkers = new ArrayList<>();
+    private static ArrayList<Marker> bonusMarkers = new ArrayList<>();
+
+    public static void setMarker (Marker marker, String type) {
+
+        switch (type) {
+            case "object":
+                objMarkers.add(marker);
+                break;
+            case "npc":
+                npcMarkers.add(marker);
+                break;
+            case "bonus":
+                bonusMarkers.add(marker);
+                break;
+            default:
+                break;
+        }
+    }
+
+public static void setMarkers (ArrayList<Marker> markers, String type) {
+
+        switch (type) {
+            case "object":
+                objMarkers = markers;
+                break;
+            case "npc":
+                npcMarkers = markers;
+                break;
+            case "bonus":
+                bonusMarkers = markers;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static ArrayList<Marker> getMarkers (String type) {
+
+        switch (type) {
+            case "object":
+                return objMarkers;
+            case "npc":
+                return npcMarkers;
+            case "bonus":
+                return bonusMarkers;
+            default:
+                return null;
+        }
+    }
+
+}
+
+
