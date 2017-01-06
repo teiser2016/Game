@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.startupActions;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.Game.Game.R;
+import com.Game.Game.requestsDB.CharRequest;
+import com.Game.Game.requestsDB.CharToUser;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;

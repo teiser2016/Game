@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.requestsDB;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;

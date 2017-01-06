@@ -2,8 +2,6 @@ package com.Game.Game.tests;
 
 import android.test.suitebuilder.annotation.SmallTest;
 
-import com.Game.Game.CharToUser;
-
 import junit.framework.TestCase;
 
 /**

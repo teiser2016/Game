@@ -1,6 +1,5 @@
-package com.Game.Game;
+package com.Game.Game.startupActions;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -10,8 +9,10 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.Toast;
+
+import com.Game.Game.MainActivity;
+import com.Game.Game.R;
+import com.Game.Game.requestsDB.CharRequest;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;

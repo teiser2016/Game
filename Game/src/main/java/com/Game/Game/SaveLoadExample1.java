@@ -1,9 +1,9 @@
-/*   min ta bgalete apo ta sxolia... einai mia dokimi gia to pos 8a mporousame na kanouem to save
+   //min ta bgalete apo ta sxolia... einai mia dokimi gia to pos 8a mporousame na kanouem to save
 
 
 package com.Game.Game;
 
-
+/*
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,11 +18,11 @@ import com.google.android.gms.games.snapshot; // de litourgei auti h class
 import java.math.BigInteger;
 import java.util.Random;
 
-import static android.content.ContentValues.TAG;
+import static android.content.ContentValues.TAG;*/
 
 public class SaveLoadExample1 {
 
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -143,7 +143,5 @@ public class SaveLoadExample1 {
         // Fail, return null.
         return null;
     }
-
-}
-
 */
+}

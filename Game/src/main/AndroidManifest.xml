@@ -54,15 +54,15 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".startupActions.RegisterActivity"/>
+        <activity android:name=".startupActions.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Charoptions"/>
+        <activity android:name=".startupActions.Charoptions"/>
         <activity android:name=".Userinfo"/>
         <activity android:name=".ReviewActivity"/>
         <activity android:name=".handlers.InteractionHandler">

@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.startupActions;
 
 
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.Game.Game.R;
+import com.Game.Game.requestsDB.RegisterRequest;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;

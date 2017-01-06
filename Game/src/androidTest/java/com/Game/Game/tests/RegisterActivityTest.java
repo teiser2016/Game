@@ -1,7 +1,5 @@
 package com.Game.Game.tests;
 
-import com.Game.Game.RegisterRequest;
-
 import junit.framework.TestCase;
 
 

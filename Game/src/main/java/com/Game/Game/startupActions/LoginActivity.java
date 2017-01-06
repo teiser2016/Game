@@ -1,4 +1,4 @@
-package com.Game.Game;
+package com.Game.Game.startupActions;
 
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.Game.Game.MainActivity;
+import com.Game.Game.R;
+import com.Game.Game.requestsDB.LoginRequest;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;

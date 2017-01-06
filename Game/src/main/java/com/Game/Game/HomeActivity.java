@@ -10,10 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.Game.Game.LoginActivity;
-import com.Game.Game.RegisterActivity;
+import com.Game.Game.startupActions.Charoptions;
+import com.Game.Game.startupActions.LoginActivity;
+import com.Game.Game.startupActions.RegisterActivity;
 
 import static com.Game.Game.R.id.item_zoom_in;
 import static com.Game.Game.R.id.item_zoom_out;

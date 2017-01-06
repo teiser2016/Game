@@ -1,7 +1,7 @@
 package com.Game.Game.tests;
  
  import android.test.suitebuilder.annotation.SmallTest;
-import com.Game.Game.CharRequest;
+import com.Game.Game.requestsDB.CharRequest;
  import junit.framework.TestCase;
 
  
